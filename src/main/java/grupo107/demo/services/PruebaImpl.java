@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class PruebaImpl extends ServiceImpl<Prueba, Integer> implements PruebaSe
    private final InteresadoRepository interesadoRepository;
    private final VehiculoRepository vehiculoRepository;
    private final EmpleadoRepository empleadoRepository;
-
+   /*https://labsys.frc.utn.edu.ar/gitlab/backend-app/alumnos/proyectos-clase/3k8/sping-service-web/-/blob/main/src/main/java/ar/edu/utnfrc/sping_service_web/services/ClientServiceImpl.java?ref_type=heads*/
     @Override
     public void create(Prueba entity) {
         validarInteresado(entity.getInteresado());
