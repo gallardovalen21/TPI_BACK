@@ -31,7 +31,7 @@ public class Interesado {
     private boolean restringido;
     @Column(name="NRO_LICENCIA", unique = true)
     private Integer nroLicencia;
-    @Column(name="FECHA_VENICIMIENTO_LICENCIA")
+    @Column(name="FECHA_VENCIMIENTO_LICENCIA")
     private LocalDateTime fechaVencimientoLicencia;
 
     public boolean estaRestringido() {

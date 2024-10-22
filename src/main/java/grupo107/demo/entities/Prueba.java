@@ -33,4 +33,13 @@ public class Prueba {
     @Column(length=500, name="COMENTARIOS")
     private String comentario;
 
+
+    public void agregarComentario(String comen) {
+        if (this.comentario == null || this.comentario.isEmpty()) {
+            this.comentario = comen;
+        } else {
+            this.comentario += "\n" + comen;
+        }
+    }
+
 }

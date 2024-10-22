@@ -10,8 +10,9 @@ public class Posicion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne(mappedBy = "id")
-    private Vehiculo id_vehiculo;
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo")
+    private Vehiculo vehiculo;
     @Column(name="FECHA_HORA")
     private LocalDateTime fecha_hora;
     @Column(name="LATITUD")

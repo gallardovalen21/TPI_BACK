@@ -1,9 +1,11 @@
 package grupo107.demo.interfaces;
 
+import grupo107.demo.entities.Prueba;
+
 import java.util.List;
 
 public interface Service<T,K> {
-    void create(T entity);
+    Prueba create(T entity);
 
     void update(T entity);
 

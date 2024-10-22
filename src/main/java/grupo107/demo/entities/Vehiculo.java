@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="Vehiculos")
 @Getter @Setter
@@ -12,6 +14,8 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     private int id;
+    @OneToMany(mappedBy = "vehiculo")
+    private List<Posicion> posiciones;
     @ManyToOne
     @JoinColumn(name="ID_MODELO", nullable = false)
     private Modelo modelo;
