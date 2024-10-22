@@ -24,7 +24,7 @@ public class PruebaImpl extends ServiceImpl<Prueba, Integer> implements PruebaSe
    /*https://labsys.frc.utn.edu.ar/gitlab/backend-app/alumnos/proyectos-clase/3k8/sping-service-web/-/blob/main/src/main/java/ar/edu/utnfrc/sping_service_web/services/ClientServiceImpl.java?ref_type=heads*/
    @Override
    public Prueba create(Prueba entity) {
-       Integer ina = entity.getEmpleado().getLegajo();
+
        Optional<Empleado> em = empleadoRepository.findById(entity.getEmpleado().getLegajo());
        if (em.isEmpty()) {
            return null;
@@ -35,7 +35,7 @@ public class PruebaImpl extends ServiceImpl<Prueba, Integer> implements PruebaSe
        prueba.setEmpleado(em.get());
        prueba.setInteresado(interesado2);
        prueba.setVehiculo(vehiculo);
-
+       prueba.setIncidente(entity.isIncidente());
        prueba.setFechaInicio(entity.getFechaInicio());
        prueba.setFechaFin(entity.getFechaFin());
        prueba.setComentario(entity.getComentario());
@@ -46,7 +46,6 @@ public class PruebaImpl extends ServiceImpl<Prueba, Integer> implements PruebaSe
 
    public ResponseEntity<Prueba> finalizar(int id, FinalizarPruebaRequest request) {
     return pruebaRepository.findById(id).map(prueba -> {
-        //corroborar que fecha fin
         prueba.setFechaFin(LocalDateTime.now());
         prueba.agregarComentario(request.getComentario());
         Prueba pruebaActualizada = pruebaRepository.save(prueba);
@@ -59,7 +58,7 @@ public class PruebaImpl extends ServiceImpl<Prueba, Integer> implements PruebaSe
     private Vehiculo verificarDisponibilidadVehiculo(Vehiculo vehiculo) {
         Vehiculo vehiculo1 = vehiculoRepository.findById(vehiculo.getId())
                 .orElseThrow(() -> new IllegalArgumentException("No se encontro el vehiculo con id  " + vehiculo.getId()));
-        List<Prueba> pruebas = pruebaRepository.findByVehiculoId(vehiculo1.getId());
+        List<Prueba> pruebas = pruebaRepository.findByVehiculoId(vehiculo1.getId()).stream().filter(x-> x.getFechaFin() == null).toList();
         if(!pruebas.isEmpty())
         {   throw new IllegalArgumentException("El vehiculo esta en Uso");
         }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name="Pruebas")
@@ -25,6 +24,8 @@ public class Prueba {
     @ManyToOne
     @JoinColumn(name = "ID_EMPLEADO", nullable = false)
     private Empleado empleado;
+    @JoinColumn(name = "INCIDENTE")
+    private boolean incidente;
     @Column(name="FECHA_HORA_INICIO")
     private LocalDateTime fechaInicio;
     @Column(name="FECHA_HORA_FIN")
