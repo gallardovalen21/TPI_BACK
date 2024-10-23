@@ -13,13 +13,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/vehiculos/")
 @RequiredArgsConstructor
 public class VehiculoController {
 
     private final PruebaRepository pruebaRepository;
 
-    @GetMapping("/vehiculos/{id_vehiculo}/pruebas")
+    @GetMapping("/{id_vehiculo}/pruebas")
     public ResponseEntity<List<Prueba>> getAllPruebasVehiculo(@PathVariable int id_vehiculo) {
         List<Prueba> pruebas = pruebaRepository.findAll().stream()
                 .filter(x -> (x.getVehiculo().getId())==id_vehiculo)
